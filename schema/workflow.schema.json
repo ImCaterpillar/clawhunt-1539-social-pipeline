@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "海外社媒获客工作流配置",
+  "type": "object",
+  "required": ["workflow_name", "platforms", "publish_plan", "moderation"],
+  "additionalProperties": false,
+  "properties": {
+    "workflow_name": { "type": "string", "minLength": 2, "maxLength": 80 },
+    "platforms": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["platform", "accounts"],
+        "additionalProperties": false,
+        "properties": {
+          "platform": {
+            "type": "string",
+            "enum": ["facebook", "instagram", "tiktok"]
+          },
+          "accounts": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["account_id", "alias"],
+              "additionalProperties": false,
+              "properties": {
+                "account_id": { "type": "string", "minLength": 2 },
+                "alias": { "type": "string", "minLength": 2 },
+                "authorized": { "type": "boolean", "default": false }
+              }
+            }
+          }
+        }
+      }
+    },
+    "publish_plan": {
+      "type": "object",
+      "required": ["daily_min", "daily_max", "timezone"],
+      "additionalProperties": false,
+      "properties": {
+        "daily_min": { "type": "integer", "minimum": 1 },
+        "daily_max": { "type": "integer", "minimum": 1 },
+        "timezone": { "type": "string", "pattern": "^[A-Za-z_+/]+$" },
+        "best_hours": { "type": "array", "items": { "type": "integer" } }
+      }
+    },
+    "moderation": {
+      "type": "object",
+      "required": ["human_in_loop", "steps"],
+      "additionalProperties": false,
+      "properties": {
+        "human_in_loop": { "type": "boolean" },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 3 }
+        }
+      }
+    },
+    "cost_model": {
+      "type": "object",
+      "properties": {
+        "dev_cost_note": { "type": "string" },
+        "ops_cost_note": { "type": "string" },
+        "currency": { "type": "string", "pattern": "^USD$" }
+      }
+    }
+  }
+}
