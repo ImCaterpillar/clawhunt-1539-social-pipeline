@@ -1,0 +1,44 @@
+{
+  "workflow_name": "外贸社媒获客工作流样例（脱敏）",
+  "platforms": [
+    {
+      "platform": "facebook",
+      "accounts": [
+        { "account_id": "fb-demo-001", "alias": "总代展示号", "authorized": false },
+        { "account_id": "fb-demo-002", "alias": "行业号", "authorized": false }
+      ]
+    },
+    {
+      "platform": "instagram",
+      "accounts": [
+        { "account_id": "ig-demo-001", "alias": "品牌视觉号", "authorized": false }
+      ]
+    },
+    {
+      "platform": "tiktok",
+      "accounts": [
+        { "account_id": "tt-demo-001", "alias": "短视频矩阵号", "authorized": false }
+      ]
+    }
+  ],
+  "publish_plan": {
+    "daily_min": 2,
+    "daily_max": 3,
+    "timezone": "Asia/Shanghai",
+    "best_hours": [9, 13, 20]
+  },
+  "moderation": {
+    "human_in_loop": true,
+    "steps": [
+      "机器生成每日 2-3 条内容草稿",
+      "运营人在看板逐条审核批准或驳回",
+      "批准后进入模拟发布队列（不碰真实账号）",
+      "发布失败自动重试一次并告警"
+    ]
+  },
+  "cost_model": {
+    "dev_cost_note": "一次实现含流程/审核/模拟发布/反馈，不含真实平台广告预算",
+    "ops_cost_note": "运行期主要成本为人工审核时间与媒体素材制作，样例未消耗 API 费用",
+    "currency": "USD"
+  }
+}
